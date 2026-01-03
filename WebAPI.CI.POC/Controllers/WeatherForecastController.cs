@@ -21,6 +21,11 @@ namespace WebAPI.CI.POC.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            CIDTO cIDTO = new CIDTO
+            {
+                Id = 1,
+                Name = "Sample Name"
+            };  
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
