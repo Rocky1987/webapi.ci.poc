@@ -1,0 +1,17 @@
+## [Visual Studio 2022 暫存檔]
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## [環境設定檔]
+# 建議不要上傳開發用的設定，或是上傳 appsettings.json 作為範本
+appsettings.Development.json
+appsettings.Local.json
+
+## [作業系統雜項]
+.DS_Store
+Thumbs.db

@@ -1,0 +1,39 @@
+name: WebAPI POC CI
+
+# 觸發條件：當 develop 分支有推送或 PR 時
+on:
+  push:
+    branches: [ "develop" ]
+    paths:
+      - "WebAPI.CI.POC/**"    # 只有專案資料夾變動才觸發
+      - "WebAPI.CI.POC.sln"   # 方案檔變動也觸發
+  pull_request:
+    branches: [ "develop" ]
+    paths:
+      - "WebAPI.CI.POC/**"
+      - "WebAPI.CI.POC.sln"
+
+jobs:
+  build:
+    name: .NET 8 Build Check
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 下載程式碼
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. 安裝 .NET 8 SDK
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # 3. 還原 NuGet 套件
+      # 直接指向根目錄的方案檔
+      - name: Restore Dependencies
+        run: dotnet restore WebAPI.CI.POC.sln
+
+      # 4. 編譯專案 (驗證是否缺檔)
+      - name: Build API
+        run: dotnet build WebAPI.CI.POC.sln --configuration Release --no-restore
